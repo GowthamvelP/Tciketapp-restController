@@ -1,14 +1,14 @@
 package com.naresh.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.gowthamvel.exception.ServiceException;
 import com.gowthamvel.service.UserDescUpdateDAOService;
 
-@Controller
+@RestController
 @RequestMapping("/update")
 public class UpdateDescriptionController {
 	UserDescUpdateDAOService us = new UserDescUpdateDAOService();
@@ -19,7 +19,7 @@ public class UpdateDescriptionController {
 
 		try {
 			us.descService(tId, uId, desc);
-
+			return "Description updated";
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}
@@ -32,6 +32,8 @@ public class UpdateDescriptionController {
 
 		try {
 			us.updateService(tId, uId, state);
+			return "Status updated";
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

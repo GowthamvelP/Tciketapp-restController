@@ -18,18 +18,18 @@ public class CourseController {
 	private List<Course> courseList = new ArrayList<Course>();
 
 	@GetMapping
-	public String index(ModelMap modelMap){
+	public String index(ModelMap modelMap) {
 
 		System.out.println("Course->index");
-		courseList.add(new Course(1,"Core Java"));
-		courseList.add(new Course(2,"Spring"));
+		courseList.add(new Course(1, "Core Java"));
+		courseList.add(new Course(2, "Spring"));
 		modelMap.addAttribute("COURSE_LIST", courseList);
 		return "courselist.jsp";
 	}
 
 	@GetMapping("/save")
-	public String store(@RequestParam("id") String id, @RequestParam("name") String name){
-		System.out.println("Course->save->id:" + id +",name:" + name);
+	public String store(@RequestParam("id") String id, @RequestParam("name") String name) {
+		System.out.println("Course->save->id:" + id + ",name:" + name);
 		Course course = new Course();
 		course.setId(Integer.valueOf(id));
 		course.setName(name);
@@ -40,6 +40,7 @@ public class CourseController {
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") Long id) {
 		System.out.println("Course->delete->id:" + id);
+
 		return "redirect:../courses";
 	}
 
