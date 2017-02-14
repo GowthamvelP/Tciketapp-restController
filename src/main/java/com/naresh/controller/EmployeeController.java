@@ -3,6 +3,7 @@ package com.naresh.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ public class EmployeeController {
 	Employee u = new Employee();
 	EmployeeService es = new EmployeeService();
 
-	@GetMapping("/register")
+	@PostMapping("/register")
 	public String register(@RequestParam("roleId") long rid, @RequestParam("deptId") long did,
 			@RequestParam("empName") String name, @RequestParam("password") String password,
 			@RequestParam("emailId") String emailId) throws ServiceException {
@@ -37,10 +38,13 @@ public class EmployeeController {
 			u.setEmailid(emailId);
 			u.setPassword(password);
 			es.saveService(u);
+			return "successfull";
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "../assign.jsp";
 		}
-		return "../assign.jsp";
+		
 	}
 
 	@GetMapping("/assign")
@@ -56,6 +60,7 @@ public class EmployeeController {
 			e.printStackTrace();
 		}
 		return "../assign.jsp";
+
 	}
 
 	@GetMapping("/solution")
@@ -65,7 +70,7 @@ public class EmployeeController {
 		try {
 			AssignEmployeeService aes = new AssignEmployeeService();
 			aes.saveService(uid, tid, state, soln);
-
+			return "successfull";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -92,6 +97,7 @@ public class EmployeeController {
 		try {
 			AssignEmployeeService aes = new AssignEmployeeService();
 			aes.saveService(id);
+			return "successfull";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
